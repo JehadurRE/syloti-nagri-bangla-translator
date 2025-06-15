@@ -1,6 +1,5 @@
-
 import { useState, useEffect } from 'react';
-import { Copy, Download, RefreshCw, AlertCircle, CheckCircle } from 'lucide-react';
+import { Copy, Download, RefreshCw, AlertCircle, CheckCircle, Shuffle } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface ConversionResponse {
@@ -14,6 +13,7 @@ const Converter = () => {
   const [apiToken, setApiToken] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [remainingRequests, setRemainingRequests] = useState<number | null>(null);
+  const [currentExample, setCurrentExample] = useState(0);
 
   useEffect(() => {
     const savedToken = localStorage.getItem('syloti-api-token');
@@ -27,6 +27,30 @@ const Converter = () => {
     { value: 'syloti-to-bangla', label: 'Syloti Nagri → Bangla' },
     { value: 'phonetic-to-syloti', label: 'Phonetic → Syloti Nagri' }
   ];
+
+  const examples = {
+    'bangla-to-syloti': [
+      'আমি তোমাকে ভালোবাসি',
+      'সিলেট একটি সুন্দর শহর',
+      'আজ আবহাওয়া খুব ভালো',
+      'তুমি কেমন আছো?',
+      'আমরা বাড়ি যাবো'
+    ],
+    'syloti-to-bangla': [
+      'ꠀꠝꠤ ꠔꠥꠝꠣꠞꠦ ꠛꠣꠟꠧꠛꠣꠍꠤ',
+      'ꠍꠤꠟꠐ ꠄꠇꠔꠣ ꠡꠥꠘ꠆ꠖꠞ ꠡꠞ',
+      'ꠀꠎ ꠀꠛꠀꠅꠀ ꠈꠥꠛ ꠛꠣꠟꠧ',
+      'ꠔꠥꠝꠤ ꠇꠦꠝꠧꠘ ꠀꠍꠧ?',
+      'ꠀꠝꠞꠣ ꠛꠣꠠꠤ ꠎꠣꠛꠧ'
+    ],
+    'phonetic-to-syloti': [
+      'ami tomake bhalobashi',
+      'sylhet ekta shundor shohor',
+      'aj abohawa khub bhalo',
+      'tumi kemon acho?',
+      'amra bari jabo'
+    ]
+  };
 
   const handleConvert = async () => {
     if (!inputText.trim()) {
@@ -90,6 +114,24 @@ const Converter = () => {
     setOutputText('');
   };
 
+  const getRandomExample = () => {
+    const examplesList = examples[conversionType];
+    const randomIndex = Math.floor(Math.random() * examplesList.length);
+    setCurrentExample(randomIndex);
+    setInputText(examplesList[randomIndex]);
+  };
+
+  const getCurrentExample = () => {
+    return examples[conversionType][currentExample] || examples[conversionType][0];
+  };
+
+  // Reset example when conversion type changes
+  useEffect(() => {
+    setCurrentExample(0);
+    setInputText('');
+    setOutputText('');
+  }, [conversionType]);
+
   return (
     <div className="pt-16 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
@@ -140,6 +182,35 @@ const Converter = () => {
                   }`}
                 >
                   {option.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Examples Section */}
+        <div className="mb-8">
+          <div className="glass-effect p-6 rounded-2xl">
+            <div className="flex items-center justify-between mb-3">
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                Try an Example
+              </label>
+              <button
+                onClick={getRandomExample}
+                className="flex items-center space-x-1 px-3 py-1 text-xs bg-blue-500/20 text-blue-600 dark:text-blue-400 rounded-lg hover:bg-blue-500/30 transition-colors"
+              >
+                <Shuffle className="w-3 h-3" />
+                <span>Random</span>
+              </button>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+              {examples[conversionType].map((example, index) => (
+                <button
+                  key={index}
+                  onClick={() => setInputText(example)}
+                  className="p-3 text-left text-sm bg-white/30 dark:bg-gray-800/30 rounded-lg hover:bg-white/50 dark:hover:bg-gray-800/50 transition-all duration-200 border border-gray-200/50 dark:border-gray-700/50"
+                >
+                  {example}
                 </button>
               ))}
             </div>
