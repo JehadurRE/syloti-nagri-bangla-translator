@@ -1,9 +1,15 @@
 
+import { useState } from 'react';
 import { Gamepad, Target, BookOpen, Zap, Trophy, Star } from 'lucide-react';
+import CharacterMatch from '../components/games/CharacterMatch';
+import WordBuilder from '../components/games/WordBuilder';
 
 const Games = () => {
+  const [currentGame, setCurrentGame] = useState<string | null>(null);
+
   const games = [
     {
+      id: 'character-match',
       title: "Character Match",
       description: "Match Syloti Nagri characters with their Bangla equivalents",
       icon: Target,
@@ -12,6 +18,7 @@ const Games = () => {
       status: "Available"
     },
     {
+      id: 'word-builder',
       title: "Word Builder",
       description: "Construct words by combining Syloti Nagri characters",
       icon: BookOpen,
@@ -53,6 +60,23 @@ const Games = () => {
     }
   };
 
+  const handleGameClick = (gameId: string) => {
+    setCurrentGame(gameId);
+  };
+
+  const handleBackToGames = () => {
+    setCurrentGame(null);
+  };
+
+  // Render specific game components
+  if (currentGame === 'character-match') {
+    return <CharacterMatch onBack={handleBackToGames} />;
+  }
+
+  if (currentGame === 'word-builder') {
+    return <WordBuilder onBack={handleBackToGames} />;
+  }
+
   return (
     <div className="min-h-screen pt-20 pb-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -76,6 +100,7 @@ const Games = () => {
                 className={`glass-effect rounded-xl p-8 hover:scale-105 transition-all duration-300 ${
                   game.status === 'Available' ? 'cursor-pointer' : 'opacity-60'
                 }`}
+                onClick={() => game.status === 'Available' && game.id && handleGameClick(game.id)}
               >
                 <div className="flex items-center mb-4">
                   <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center mr-4">
