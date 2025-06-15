@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -11,6 +10,9 @@ import Converter from "./components/Converter";
 import About from "./components/About";
 import Footer from "./components/Footer";
 import NotFound from "./pages/NotFound";
+import Learn from "./pages/Learn";
+import Games from "./pages/Games";
+import Practice from "./pages/Practice";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +30,9 @@ const App = () => (
                 <Route path="/" element={<Home />} />
                 <Route path="/converter" element={<Converter />} />
                 <Route path="/about" element={<About />} />
+                <Route path="/learn" element={<Learn />} />
+                <Route path="/games" element={<Games />} />
+                <Route path="/practice" element={<Practice />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
