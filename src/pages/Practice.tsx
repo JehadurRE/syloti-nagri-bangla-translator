@@ -1,9 +1,14 @@
-
 import { BookOpen, PenTool, Mic, Eye, Clock, CheckCircle } from 'lucide-react';
 import { useState } from 'react';
+import WritingPractice from '../components/practice/WritingPractice';
+import ReadingPractice from '../components/practice/ReadingPractice';
+import ListeningPractice from '../components/practice/ListeningPractice';
+import VocabularyPractice from '../components/practice/VocabularyPractice';
 
 const Practice = () => {
   const [selectedMode, setSelectedMode] = useState('writing');
+  const [currentExercise, setCurrentExercise] = useState<any>(null);
+  const [completedExercises, setCompletedExercises] = useState<Set<string>>(new Set());
 
   const practiceModess = [
     {
@@ -69,6 +74,67 @@ const Practice = () => {
     }
   };
 
+  const handleStartPractice = (exercise: any) => {
+    setCurrentExercise({ ...exercise, mode: selectedMode });
+  };
+
+  const handleBackToPractice = () => {
+    setCurrentExercise(null);
+  };
+
+  const handleCompleteExercise = () => {
+    if (currentExercise) {
+      const exerciseKey = `${currentExercise.mode}-${currentExercise.title}`;
+      setCompletedExercises(prev => new Set([...prev, exerciseKey]));
+    }
+    setCurrentExercise(null);
+  };
+
+  const isExerciseCompleted = (exercise: any) => {
+    const exerciseKey = `${selectedMode}-${exercise.title}`;
+    return completedExercises.has(exerciseKey);
+  };
+
+  // Render specific practice components
+  if (currentExercise) {
+    switch (currentExercise.mode) {
+      case 'writing':
+        return (
+          <WritingPractice
+            exercise={currentExercise}
+            onBack={handleBackToPractice}
+            onComplete={handleCompleteExercise}
+          />
+        );
+      case 'reading':
+        return (
+          <ReadingPractice
+            exercise={currentExercise}
+            onBack={handleBackToPractice}
+            onComplete={handleCompleteExercise}
+          />
+        );
+      case 'listening':
+        return (
+          <ListeningPractice
+            exercise={currentExercise}
+            onBack={handleBackToPractice}
+            onComplete={handleCompleteExercise}
+          />
+        );
+      case 'vocabulary':
+        return (
+          <VocabularyPractice
+            exercise={currentExercise}
+            onBack={handleBackToPractice}
+            onComplete={handleCompleteExercise}
+          />
+        );
+      default:
+        return null;
+    }
+  }
+
   return (
     <div className="min-h-screen pt-20 pb-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -117,48 +183,54 @@ const Practice = () => {
           </h2>
           
           <div className="space-y-4">
-            {exercises[selectedMode as keyof typeof exercises]?.map((exercise, index) => (
-              <div
-                key={index}
-                className="flex items-center justify-between p-4 bg-white/50 dark:bg-white/5 rounded-lg border border-white/20 dark:border-white/10 hover:bg-white/70 dark:hover:bg-white/10 transition-all duration-200"
-              >
-                <div className="flex items-center space-x-4">
-                  <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                    exercise.completed 
-                      ? 'bg-green-500' 
-                      : 'bg-gradient-to-r from-blue-500 to-purple-600'
-                  }`}>
-                    {exercise.completed ? (
-                      <CheckCircle className="w-5 h-5 text-white" />
-                    ) : (
-                      <Clock className="w-5 h-5 text-white" />
-                    )}
-                  </div>
-                  
-                  <div>
-                    <h3 className="font-semibold text-gray-800 dark:text-white">
-                      {exercise.title}
-                    </h3>
-                    <div className="flex items-center space-x-3 mt-1">
-                      <span className={`text-xs px-2 py-1 rounded-full ${getDifficultyColor(exercise.difficulty)}`}>
-                        {exercise.difficulty}
-                      </span>
-                      <span className="text-sm text-gray-500 dark:text-gray-400">
-                        {exercise.duration}
-                      </span>
+            {exercises[selectedMode as keyof typeof exercises]?.map((exercise, index) => {
+              const completed = isExerciseCompleted(exercise);
+              return (
+                <div
+                  key={index}
+                  className="flex items-center justify-between p-4 bg-white/50 dark:bg-white/5 rounded-lg border border-white/20 dark:border-white/10 hover:bg-white/70 dark:hover:bg-white/10 transition-all duration-200"
+                >
+                  <div className="flex items-center space-x-4">
+                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+                      completed 
+                        ? 'bg-green-500' 
+                        : 'bg-gradient-to-r from-blue-500 to-purple-600'
+                    }`}>
+                      {completed ? (
+                        <CheckCircle className="w-5 h-5 text-white" />
+                      ) : (
+                        <Clock className="w-5 h-5 text-white" />
+                      )}
+                    </div>
+                    
+                    <div>
+                      <h3 className="font-semibold text-gray-800 dark:text-white">
+                        {exercise.title}
+                      </h3>
+                      <div className="flex items-center space-x-3 mt-1">
+                        <span className={`text-xs px-2 py-1 rounded-full ${getDifficultyColor(exercise.difficulty)}`}>
+                          {exercise.difficulty}
+                        </span>
+                        <span className="text-sm text-gray-500 dark:text-gray-400">
+                          {exercise.duration}
+                        </span>
+                      </div>
                     </div>
                   </div>
+                  
+                  <button 
+                    onClick={() => handleStartPractice(exercise)}
+                    className={`px-6 py-2 rounded-lg font-semibold transition-all duration-200 ${
+                      completed
+                        ? 'bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-400 hover:bg-green-500 hover:text-white'
+                        : 'bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:scale-105'
+                    }`}
+                  >
+                    {completed ? 'Practice Again' : 'Start Practice'}
+                  </button>
                 </div>
-                
-                <button className={`px-6 py-2 rounded-lg font-semibold transition-all duration-200 ${
-                  exercise.completed
-                    ? 'bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-400'
-                    : 'bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:scale-105'
-                }`}>
-                  {exercise.completed ? 'Completed' : 'Start Practice'}
-                </button>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
