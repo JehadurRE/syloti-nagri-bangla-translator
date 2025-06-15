@@ -19,33 +19,82 @@ const ReadingPractice = ({ exercise, onBack, onComplete }: ReadingPracticeProps)
   const [score, setScore] = useState(0);
   const [showResult, setShowResult] = useState(false);
 
-  const words = [
-    {
-      syloti: 'ꠙꠣꠘꠤ',
-      bangla: 'পানি',
-      english: 'Water',
-      options: ['পানি', 'মানুষ', 'বাড়ি', 'খাবার']
-    },
-    {
-      syloti: 'ꠝꠣꠘꠥꠡ',
-      bangla: 'মানুষ',
-      english: 'Person',
-      options: ['বাড়ি', 'মানুষ', 'পানি', 'রাস্তা']
-    },
-    {
-      syloti: 'ꠛꠣꠠꠤ',
-      bangla: 'বাড়ি',
-      english: 'House',
-      options: ['খাবার', 'পানি', 'বাড়ি', 'গাছ']
-    },
-    {
-      syloti: 'ꠈꠣꠛꠣꠞ',
-      bangla: 'খাবার',
-      english: 'Food',
-      options: ['খাবার', 'মানুষ', 'বাড়ি', 'পানি']
-    },
-  ];
+  const exerciseSets = {
+    "Simple Words": [
+      {
+        syloti: 'ꠙꠣꠘꠤ',
+        bangla: 'পানি',
+        english: 'Water',
+        options: ['পানি', 'মানুষ', 'বাড়ি', 'খাবার']
+      },
+      {
+        syloti: 'ꠝꠣꠘꠥꠡ',
+        bangla: 'মানুষ',
+        english: 'Person',
+        options: ['বাড়ি', 'মানুষ', 'পানি', 'রাস্তা']
+      },
+      {
+        syloti: 'ꠛꠣꠠꠤ',
+        bangla: 'বাড়ি',
+        english: 'House',
+        options: ['খাবার', 'পানি', 'বাড়ি', 'গাছ']
+      },
+      {
+        syloti: 'ꠈꠣꠛꠣꠞ',
+        bangla: 'খাবার',
+        english: 'Food',
+        options: ['খাবার', 'মানুষ', 'বাড়ি', 'পানি']
+      },
+    ],
+    "Short Sentences": [
+      {
+        syloti: 'ꠀꠝꠤ ꠎꠣꠁ',
+        bangla: 'আমি যাই',
+        english: 'I go',
+        options: ['আমি যাই', 'তুমি আসো', 'সে খায়', 'আমরা থাকি']
+      },
+      {
+        syloti: 'ꠔꠥꠝꠤ ꠀꠡ',
+        bangla: 'তুমি আসো',
+        english: 'You come',
+        options: ['সে যায়', 'তুমি আসো', 'আমি খাই', 'তারা দেখে']
+      },
+      {
+        syloti: 'ꠡꠦ ꠈꠣꠄ',
+        bangla: 'সে খায়',
+        english: 'He/She eats',
+        options: ['আমি ঘুমাই', 'তুমি পড়ো', 'সে খায়', 'আমরা খেলি']
+      },
+      {
+        syloti: 'ꠀꠝꠞꠣ ꠕꠣꠇꠤ',
+        bangla: 'আমরা থাকি',
+        english: 'We stay',
+        options: ['তারা যায়', 'আমরা থাকি', 'সে আসে', 'তুমি খাও']
+      },
+    ],
+    "Poetry Verses": [
+      {
+        syloti: 'ꠀꠝꠣꠞ ꠡꠥꠘ꠆ꠗꠞ ꠛꠣꠂꠟꠣ',
+        bangla: 'আমার সুন্দর বাংলা',
+        english: 'My beautiful Bengal',
+        options: ['আমার সুন্দর বাংলা', 'তোমার মিষ্টি হাসি', 'সবুজ মাঠের গান', 'নীল আকাশের তলে']
+      },
+      {
+        syloti: 'ꠘꠤꠟ ꠀꠇꠣꠡꠦꠞ ꠔꠟꠦ',
+        bangla: 'নীল আকাশের তলে',
+        english: 'Under the blue sky',
+        options: ['সবুজ বনের মাঝে', 'নীল আকাশের তলে', 'সাদা মেঘের ছায়া', 'হলুদ ধানের ক্ষেত']
+      },
+      {
+        syloti: 'ꠍꠛꠥꠎ ꠝꠣꠑꠦꠞ ꠉꠣꠘ',
+        bangla: 'সবুজ মাঠের গান',
+        english: 'Song of green fields',
+        options: ['পাখির মধুর সুর', 'সবুজ মাঠের গান', 'বাতাসের শীতল স্পর্শ', 'ফুলের সুগন্ধ']
+      },
+    ]
+  };
 
+  const words = exerciseSets[exercise.title as keyof typeof exerciseSets] || exerciseSets["Simple Words"];
   const word = words[currentWord];
 
   const handleAnswerSelect = (answer: string) => {
@@ -93,7 +142,7 @@ const ReadingPractice = ({ exercise, onBack, onComplete }: ReadingPracticeProps)
               {exercise.title}
             </h1>
             <p className="text-gray-600 dark:text-gray-300">
-              Word {currentWord + 1} of {words.length}
+              Item {currentWord + 1} of {words.length}
             </p>
           </div>
           <div className="text-right">
@@ -106,12 +155,12 @@ const ReadingPractice = ({ exercise, onBack, onComplete }: ReadingPracticeProps)
         <div className="glass-effect rounded-xl p-8">
           <div className="text-center mb-8">
             <h2 className="text-lg font-semibold mb-6 text-gray-800 dark:text-white">
-              Read the Syloti Nagri word and select its Bangla meaning
+              Read the Syloti Nagri text and select its Bangla meaning
             </h2>
             
-            {/* Syloti Word Display */}
+            {/* Syloti Text Display */}
             <div className="bg-white/50 dark:bg-white/5 rounded-lg p-8 mb-6 inline-block">
-              <div className="text-6xl font-bold text-blue-600 mb-2">
+              <div className="text-4xl md:text-6xl font-bold text-blue-600 mb-2">
                 {word.syloti}
               </div>
               <div className="text-sm text-gray-500 dark:text-gray-400">
@@ -120,7 +169,7 @@ const ReadingPractice = ({ exercise, onBack, onComplete }: ReadingPracticeProps)
             </div>
 
             {/* Answer Options */}
-            <div className="grid grid-cols-2 gap-4 max-w-md mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
               {word.options.map((option, index) => (
                 <button
                   key={index}

@@ -20,29 +20,82 @@ const ListeningPractice = ({ exercise, onBack, onComplete }: ListeningPracticePr
   const [showResult, setShowResult] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const sounds = [
-    {
-      character: 'ꠀ',
-      sound: 'A',
-      options: ['ꠀ', 'ꠁ', 'ꠃ', 'ꠄ']
-    },
-    {
-      character: 'ꠁ',
-      sound: 'I',
-      options: ['ꠄ', 'ꠁ', 'ꠀ', 'ꠅ']
-    },
-    {
-      character: 'ꠃ',
-      sound: 'U',
-      options: ['ꠁ', 'ꠄ', 'ꠃ', 'ꠀ']
-    },
-    {
-      character: 'ꠄ',
-      sound: 'E',
-      options: ['ꠄ', 'ꠀ', 'ꠅ', 'ꠁ']
-    },
-  ];
+  const exerciseSets = {
+    "Character Sounds": [
+      {
+        character: 'ꠀ',
+        sound: 'A',
+        description: 'Vowel A',
+        options: ['ꠀ', 'ꠁ', 'ꠃ', 'ꠄ']
+      },
+      {
+        character: 'ꠁ',
+        sound: 'I',
+        description: 'Vowel I',
+        options: ['ꠄ', 'ꠁ', 'ꠀ', 'ꠅ']
+      },
+      {
+        character: 'ꠇ',
+        sound: 'KA',
+        description: 'Consonant KA',
+        options: ['ꠈ', 'ꠉ', 'ꠇ', 'ꠊ']
+      },
+      {
+        character: 'ꠘ',
+        sound: 'NA',
+        description: 'Consonant NA',
+        options: ['ꠝ', 'ꠘ', 'ꠞ', 'ꠟ']
+      },
+    ],
+    "Word Pronunciation": [
+      {
+        character: 'ꠙꠣꠘꠤ',
+        sound: 'PANI',
+        description: 'Water',
+        options: ['ꠙꠣꠘꠤ', 'ꠝꠣꠘꠥꠡ', 'ꠛꠣꠠꠤ', 'ꠈꠣꠛꠣꠞ']
+      },
+      {
+        character: 'ꠝꠣꠘꠥꠡ',
+        sound: 'MANUS',
+        description: 'Person',
+        options: ['ꠛꠣꠠꠤ', 'ꠝꠣꠘꠥꠡ', 'ꠙꠣꠘꠤ', 'ꠞꠣꠡ꠆ꠔꠣ']
+      },
+      {
+        character: 'ꠛꠣꠠꠤ',
+        sound: 'BARI',
+        description: 'House',
+        options: ['ꠈꠣꠛꠣꠞ', 'ꠙꠣꠘꠤ', 'ꠛꠣꠠꠤ', 'ꠉꠣꠌ']
+      },
+      {
+        character: 'ꠎꠣꠃꠣ',
+        sound: 'JAWA',
+        description: 'To go',
+        options: ['ꠀꠡꠣ', 'ꠎꠣꠃꠣ', 'ꠈꠣꠃꠣ', 'ꠗꠦꠈꠣ']
+      },
+    ],
+    "Conversational Syloti": [
+      {
+        character: 'ꠀꠝꠤ ꠇꠦꠝꠘ ꠀꠌꠤ?',
+        sound: 'AMI KEMON ACHI',
+        description: 'How am I?',
+        options: ['ꠀꠝꠤ ꠇꠦꠝꠘ ꠀꠌꠤ?', 'ꠔꠥꠝꠤ ꠇꠦꠝꠘ ꠀꠌ?', 'ꠡꠦ ꠇꠦꠝꠘ ꠀꠌꠦ?', 'ꠀꠝꠞꠣ ꠇꠦꠝꠘ ꠀꠌꠤ?']
+      },
+      {
+        character: 'ꠔꠥꠝꠤ ꠇꠦꠝꠘ ꠀꠌ?',
+        sound: 'TUMI KEMON ACH',
+        description: 'How are you?',
+        options: ['ꠡꠦ ꠇꠦꠝꠘ ꠀꠌꠦ?', 'ꠔꠥꠝꠤ ꠇꠦꠝꠘ ꠀꠌ?', 'ꠀꠝꠤ ꠇꠦꠝꠘ ꠀꠌꠤ?', 'ꠀꠝꠞꠣ ꠇꠤ ꠇꠞꠤ?']
+      },
+      {
+        character: 'ꠀꠝꠤ ꠜꠣꠟ ꠀꠌꠤ',
+        sound: 'AMI BHAL ACHI',
+        description: 'I am well',
+        options: ['ꠔꠥꠝꠤ ꠜꠣꠟ ꠀꠌ', 'ꠀꠝꠤ ꠜꠣꠟ ꠀꠌꠤ', 'ꠡꠦ ꠜꠣꠟ ꠀꠌꠦ', 'ꠀꠝꠞꠣ ꠜꠣꠟ ꠀꠌꠤ']
+      },
+    ]
+  };
 
+  const sounds = exerciseSets[exercise.title as keyof typeof exerciseSets] || exerciseSets["Character Sounds"];
   const sound = sounds[currentSound];
 
   const playSound = () => {
@@ -51,7 +104,7 @@ const ListeningPractice = ({ exercise, onBack, onComplete }: ListeningPracticePr
     setTimeout(() => setIsPlaying(false), 1000);
     
     // In a real implementation, you would play actual audio here
-    console.log(`Playing sound: ${sound.sound}`);
+    console.log(`Playing sound: ${sound.sound} - ${sound.description}`);
   };
 
   const handleAnswerSelect = (answer: string) => {
@@ -112,7 +165,7 @@ const ListeningPractice = ({ exercise, onBack, onComplete }: ListeningPracticePr
         <div className="glass-effect rounded-xl p-8">
           <div className="text-center mb-8">
             <h2 className="text-lg font-semibold mb-6 text-gray-800 dark:text-white">
-              Listen to the pronunciation and select the correct character
+              Listen to the pronunciation and select the correct text
             </h2>
             
             {/* Audio Player */}
@@ -130,18 +183,18 @@ const ListeningPractice = ({ exercise, onBack, onComplete }: ListeningPracticePr
                 <span>{isPlaying ? 'Playing...' : 'Play Sound'}</span>
               </Button>
               <div className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-                Sound: /{sound.sound}/
+                Pronunciation: /{sound.sound}/ - {sound.description}
               </div>
             </div>
 
             {/* Answer Options */}
-            <div className="grid grid-cols-2 gap-4 max-w-md mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
               {sound.options.map((option, index) => (
                 <button
                   key={index}
                   onClick={() => !showResult && handleAnswerSelect(option)}
                   disabled={showResult}
-                  className={`p-6 rounded-lg text-4xl font-bold transition-all duration-200 ${getButtonStyle(option)} ${
+                  className={`p-6 rounded-lg text-2xl md:text-4xl font-bold transition-all duration-200 ${getButtonStyle(option)} ${
                     !showResult ? 'hover:scale-105 cursor-pointer' : 'cursor-not-allowed'
                   }`}
                 >

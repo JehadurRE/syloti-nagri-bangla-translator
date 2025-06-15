@@ -19,13 +19,40 @@ const WritingPractice = ({ exercise, onBack, onComplete }: WritingPracticeProps)
   const [score, setScore] = useState(0);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const characters = [
-    { syloti: 'ꠀ', bangla: 'অ', name: 'A' },
-    { syloti: 'ꠁ', bangla: 'ই', name: 'I' },
-    { syloti: 'ꠃ', bangla: 'উ', name: 'U' },
-    { syloti: 'ꠄ', bangla: 'এ', name: 'E' },
-    { syloti: 'ꠅ', bangla: 'ও', name: 'O' },
-  ];
+  const characterSets = {
+    "Basic Strokes": [
+      { syloti: 'ꠀ', bangla: 'অ', name: 'A' },
+      { syloti: 'ꠁ', bangla: 'ই', name: 'I' },
+      { syloti: 'ꠃ', bangla: 'উ', name: 'U' },
+      { syloti: 'ꠄ', bangla: 'এ', name: 'E' },
+      { syloti: 'ꠅ', bangla: 'ও', name: 'O' },
+    ],
+    "Vowel Characters": [
+      { syloti: 'ꠀ', bangla: 'অ', name: 'A' },
+      { syloti: '꠆ꠣ', bangla: 'আ', name: 'AA' },
+      { syloti: 'ꠁ', bangla: 'ই', name: 'I' },
+      { syloti: '꠆ꠤ', bangla: 'ঈ', name: 'II' },
+      { syloti: 'ꠃ', bangla: 'উ', name: 'U' },
+      { syloti: '꠆ꠥ', bangla: 'ঊ', name: 'UU' },
+    ],
+    "Consonant Groups": [
+      { syloti: 'ꠇ', bangla: 'ক', name: 'KA' },
+      { syloti: 'ꠈ', bangla: 'খ', name: 'KHA' },
+      { syloti: 'ꠉ', bangla: 'গ', name: 'GA' },
+      { syloti: 'ꠊ', bangla: 'ঘ', name: 'GHA' },
+      { syloti: 'ꠋ', bangla: 'ঙ', name: 'NGA' },
+      { syloti: 'ꠌ', bangla: 'চ', name: 'CHA' },
+    ],
+    "Complex Characters": [
+      { syloti: 'ꠇ꠆ꠞ', bangla: 'ক্র', name: 'KRA' },
+      { syloti: 'ꠉ꠆ꠞ', bangla: 'গ্র', name: 'GRA' },
+      { syloti: 'ꠘ꠆ꠔ', bangla: 'ন্ত', name: 'NTA' },
+      { syloti: 'ꠎ꠆ꠘ', bangla: 'য্ন', name: 'YNA' },
+      { syloti: 'ꠡ꠆ꠔ', bangla: 'স্ত', name: 'STA' },
+    ]
+  };
+
+  const characters = characterSets[exercise.title as keyof typeof characterSets] || characterSets["Basic Strokes"];
 
   useEffect(() => {
     const canvas = canvasRef.current;
