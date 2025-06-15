@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Gamepad, Target, BookOpen, Zap, Trophy, Star } from 'lucide-react';
 import CharacterMatch from '../components/games/CharacterMatch';
@@ -28,20 +29,22 @@ const Games = () => {
       status: "Available"
     },
     {
+      id: 'speed-translation',
       title: "Speed Translation",
       description: "Translate words quickly between scripts under time pressure",
       icon: Zap,
       difficulty: "Advanced",
       playtime: "15-20 min",
-      status: "Coming Soon"
+      status: "Available"
     },
     {
+      id: 'story-quest',
       title: "Story Quest",
       description: "Adventure through Sylhet's history while learning the script",
       icon: Trophy,
       difficulty: "All Levels",
       playtime: "30+ min",
-      status: "Coming Soon"
+      status: "Available"
     }
   ];
 
