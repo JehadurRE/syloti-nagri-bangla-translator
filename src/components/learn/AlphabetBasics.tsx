@@ -2,10 +2,13 @@
 import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Label } from '@/components/ui/label';
 import { ChevronLeft, ChevronRight, Volume2 } from 'lucide-react';
 
 const AlphabetBasics = ({ onBack }: { onBack: () => void }) => {
   const [currentLesson, setCurrentLesson] = useState(0);
+  const [selectedType, setSelectedType] = useState<'vowel' | 'consonant'>('vowel');
 
   const lessons = [
     {
@@ -21,11 +24,20 @@ const AlphabetBasics = ({ onBack }: { onBack: () => void }) => {
     },
     {
       title: "Vowels & Consonants",
-      content: [
+      vowels: [
+        { syloti: "ꠀ", bangla: "অ", pronunciation: "o", meaning: "vowel 'a'" },
         { syloti: "ꠁ", bangla: "ই", pronunciation: "i", meaning: "vowel 'i'" },
         { syloti: "ꠃ", bangla: "উ", pronunciation: "u", meaning: "vowel 'u'" },
         { syloti: "ꠄ", bangla: "এ", pronunciation: "e", meaning: "vowel 'e'" },
         { syloti: "ꠅ", bangla: "ও", pronunciation: "o", meaning: "vowel 'o'" },
+        { syloti: "ꠂ", bangla: "ঈ", pronunciation: "ii", meaning: "vowel 'ii'" },
+      ],
+      consonants: [
+        { syloti: "ꠇ", bangla: "ক", pronunciation: "ko", meaning: "consonant 'ka'" },
+        { syloti: "ꠈ", bangla: "খ", pronunciation: "kho", meaning: "consonant 'kha'" },
+        { syloti: "ꠉ", bangla: "গ", pronunciation: "go", meaning: "consonant 'ga'" },
+        { syloti: "ꠊ", bangla: "ঘ", pronunciation: "gho", meaning: "consonant 'gha'" },
+        { syloti: "ꠌ", bangla: "চ", pronunciation: "cho", meaning: "consonant 'cha'" },
         { syloti: "ꠍ", bangla: "ছ", pronunciation: "chho", meaning: "consonant 'chha'" },
         { syloti: "ꠎ", bangla: "জ", pronunciation: "jo", meaning: "consonant 'ja'" },
       ]
@@ -45,17 +57,30 @@ const AlphabetBasics = ({ onBack }: { onBack: () => void }) => {
 
   const currentLessonData = lessons[currentLesson];
 
+  // Get content based on lesson type
+  const getContentToDisplay = () => {
+    if (currentLesson === 1) {
+      // Vowels & Consonants lesson
+      return selectedType === 'vowel' ? currentLessonData.vowels : currentLessonData.consonants;
+    }
+    return currentLessonData.content;
+  };
+
   const nextLesson = () => {
     if (currentLesson < lessons.length - 1) {
       setCurrentLesson(currentLesson + 1);
+      setSelectedType('vowel'); // Reset to vowel when moving to next lesson
     }
   };
 
   const prevLesson = () => {
     if (currentLesson > 0) {
       setCurrentLesson(currentLesson - 1);
+      setSelectedType('vowel'); // Reset to vowel when moving to previous lesson
     }
   };
+
+  const contentToShow = getContentToDisplay();
 
   return (
     <div className="min-h-screen pt-20 pb-8 px-4 sm:px-6 lg:px-8">
@@ -83,8 +108,28 @@ const AlphabetBasics = ({ onBack }: { onBack: () => void }) => {
             </CardDescription>
           </CardHeader>
           <CardContent>
+            {/* Show selector only for Vowels & Consonants lesson */}
+            {currentLesson === 1 && (
+              <div className="mb-6">
+                <RadioGroup 
+                  value={selectedType} 
+                  onValueChange={(value) => setSelectedType(value as 'vowel' | 'consonant')}
+                  className="flex space-x-6"
+                >
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="vowel" id="vowel" />
+                    <Label htmlFor="vowel" className="text-base font-medium">Vowels</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="consonant" id="consonant" />
+                    <Label htmlFor="consonant" className="text-base font-medium">Consonants</Label>
+                  </div>
+                </RadioGroup>
+              </div>
+            )}
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {currentLessonData.content.map((item, index) => (
+              {contentToShow?.map((item, index) => (
                 <div key={index} className="p-4 bg-white/50 dark:bg-white/5 rounded-lg border border-white/20">
                   <div className="flex items-center justify-between mb-3">
                     <div className="text-4xl font-bold text-blue-600 dark:text-blue-400">
