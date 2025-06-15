@@ -1,8 +1,9 @@
-
 import { useState } from 'react';
 import { Gamepad, Target, BookOpen, Zap, Trophy, Star } from 'lucide-react';
 import CharacterMatch from '../components/games/CharacterMatch';
 import WordBuilder from '../components/games/WordBuilder';
+import SpeedTranslation from '../components/games/SpeedTranslation';
+import StoryQuest from '../components/games/StoryQuest';
 
 const Games = () => {
   const [currentGame, setCurrentGame] = useState<string | null>(null);
@@ -75,6 +76,14 @@ const Games = () => {
 
   if (currentGame === 'word-builder') {
     return <WordBuilder onBack={handleBackToGames} />;
+  }
+
+  if (currentGame === 'speed-translation') {
+    return <SpeedTranslation onBack={handleBackToGames} />;
+  }
+
+  if (currentGame === 'story-quest') {
+    return <StoryQuest onBack={handleBackToGames} />;
   }
 
   return (
