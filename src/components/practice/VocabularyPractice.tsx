@@ -17,45 +17,122 @@ const VocabularyPractice = ({ exercise, onBack, onComplete }: VocabularyPractice
   const [currentCard, setCurrentCard] = useState(0);
   const [showAnswer, setShowAnswer] = useState(false);
   const [knownWords, setKnownWords] = useState<Set<number>>(new Set());
-  const [difficulty, setDifficulty] = useState<'easy' | 'medium' | 'hard'>('easy');
 
-  const vocabularyCards = [
-    {
-      syloti: 'ꠙꠣꠘꠤ',
-      bangla: 'পানি',
-      english: 'Water',
-      category: 'Daily Objects',
-      difficulty: 'easy'
-    },
-    {
-      syloti: 'ꠝꠣꠘꠥꠡ',
-      bangla: 'মানুষ',
-      english: 'Person',
-      category: 'People',
-      difficulty: 'easy'
-    },
-    {
-      syloti: 'ꠛꠣꠠꠤ',
-      bangla: 'বাড়ি',
-      english: 'House',
-      category: 'Daily Objects',
-      difficulty: 'easy'
-    },
-    {
-      syloti: 'ꠈꠣꠛꠣꠞ',
-      bangla: 'খাবার',
-      english: 'Food',
-      category: 'Daily Objects',
-      difficulty: 'medium'
-    },
-    {
-      syloti: 'ꠅꠛꠡ꠆ꠞꠣ',
-      bangla: 'অবস্থা',
-      english: 'Condition/State',
-      category: 'Abstract Concepts',
-      difficulty: 'hard'
-    },
-  ];
+  const vocabularySets = {
+    "Daily Objects": [
+      {
+        syloti: 'ꠙꠣꠘꠤ',
+        bangla: 'পানি',
+        english: 'Water',
+        category: 'Daily Objects',
+        difficulty: 'easy'
+      },
+      {
+        syloti: 'ꠛꠣꠠꠤ',
+        bangla: 'বাড়ি',
+        english: 'House',
+        category: 'Daily Objects',
+        difficulty: 'easy'
+      },
+      {
+        syloti: 'ꠈꠣꠛꠣꠞ',
+        bangla: 'খাবার',
+        english: 'Food',
+        category: 'Daily Objects',
+        difficulty: 'medium'
+      },
+      {
+        syloti: 'ꠛꠤ',
+        bangla: 'বই',
+        english: 'Book',
+        category: 'Daily Objects',
+        difficulty: 'easy'
+      },
+      {
+        syloti: 'ꠉꠣꠠꠤ',
+        bangla: 'গাড়ি',
+        english: 'Car',
+        category: 'Daily Objects',
+        difficulty: 'medium'
+      },
+    ],
+    "Action Words": [
+      {
+        syloti: 'ꠈꠣꠃꠣ',
+        bangla: 'খাওয়া',
+        english: 'To eat',
+        category: 'Action Words',
+        difficulty: 'easy'
+      },
+      {
+        syloti: 'ꠎꠣꠃꠣ',
+        bangla: 'যাওয়া',
+        english: 'To go',
+        category: 'Action Words',
+        difficulty: 'easy'
+      },
+      {
+        syloti: 'ꠅꠡꠣ',
+        bangla: 'আসা',
+        english: 'To come',
+        category: 'Action Words',
+        difficulty: 'easy'
+      },
+      {
+        syloti: 'ꠎꠥꠖꠣ',
+        bangla: 'যুদ্ধ',
+        english: 'To fight',
+        category: 'Action Words',
+        difficulty: 'hard'
+      },
+      {
+        syloti: 'ꠡꠥꠘꠣ',
+        bangla: 'শোনা',
+        english: 'To hear',
+        category: 'Action Words',
+        difficulty: 'medium'
+      },
+    ],
+    "Abstract Concepts": [
+      {
+        syloti: 'ꠅꠛꠡ꠆ꠞꠣ',
+        bangla: 'অবস্থা',
+        english: 'Condition/State',
+        category: 'Abstract Concepts',
+        difficulty: 'hard'
+      },
+      {
+        syloti: 'ꠝꠣꠄꠣ',
+        bangla: 'মায়া',
+        english: 'Love/Affection',
+        category: 'Abstract Concepts',
+        difficulty: 'medium'
+      },
+      {
+        syloti: 'ꠡꠥꠈ',
+        bangla: 'সুখ',
+        english: 'Happiness',
+        category: 'Abstract Concepts',
+        difficulty: 'medium'
+      },
+      {
+        syloti: 'ꠗꠥꠈ',
+        bangla: 'দুঃখ',
+        english: 'Sadness',
+        category: 'Abstract Concepts',
+        difficulty: 'medium'
+      },
+      {
+        syloti: 'ꠅꠗꠞ',
+        bangla: 'আদর',
+        english: 'Affection',
+        category: 'Abstract Concepts',
+        difficulty: 'hard'
+      },
+    ]
+  };
+
+  const vocabularyCards = vocabularySets[exercise.title as keyof typeof vocabularySets] || vocabularySets["Daily Objects"];
 
   const card = vocabularyCards[currentCard];
 
