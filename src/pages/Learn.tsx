@@ -1,9 +1,15 @@
 
+import { useState } from 'react';
 import { Book, BookOpen, Users, Clock, Award } from 'lucide-react';
+import AlphabetBasics from '../components/learn/AlphabetBasics';
+import CommonWords from '../components/learn/CommonWords';
 
 const Learn = () => {
+  const [activeSection, setActiveSection] = useState<string | null>(null);
+
   const sections = [
     {
+      id: "alphabet",
       title: "Alphabet & Basics",
       description: "Learn the fundamental characters and sounds of Syloti Nagri script",
       icon: BookOpen,
@@ -11,6 +17,7 @@ const Learn = () => {
       status: "Available"
     },
     {
+      id: "words",
       title: "Common Words",
       description: "Master everyday vocabulary in Syloti Nagri",
       icon: Book,
@@ -33,6 +40,16 @@ const Learn = () => {
     }
   ];
 
+  // Show specific section components
+  if (activeSection === 'alphabet') {
+    return <AlphabetBasics onBack={() => setActiveSection(null)} />;
+  }
+
+  if (activeSection === 'words') {
+    return <CommonWords onBack={() => setActiveSection(null)} />;
+  }
+
+  // Default learn page view
   return (
     <div className="min-h-screen pt-20 pb-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -69,10 +86,19 @@ const Learn = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {sections.map((section, index) => {
             const IconComponent = section.icon;
+            const isClickable = section.status === 'Available' && section.id;
+            
             return (
               <div
                 key={index}
-                className="glass-effect rounded-xl p-8 hover:scale-105 transition-all duration-300 cursor-pointer"
+                className={`glass-effect rounded-xl p-8 hover:scale-105 transition-all duration-300 ${
+                  isClickable ? 'cursor-pointer' : 'cursor-default'
+                }`}
+                onClick={() => {
+                  if (isClickable && section.id) {
+                    setActiveSection(section.id);
+                  }
+                }}
               >
                 <div className="flex items-center mb-4">
                   <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center mr-4">
@@ -107,6 +133,12 @@ const Learn = () => {
                     ))}
                   </ul>
                 </div>
+                
+                {isClickable && (
+                  <div className="mt-4 text-sm text-blue-600 dark:text-blue-400 font-medium">
+                    Click to start learning →
+                  </div>
+                )}
               </div>
             );
           })}
