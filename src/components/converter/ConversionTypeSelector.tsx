@@ -21,7 +21,7 @@ const ConversionTypeSelector = ({ conversionType, setConversionType }: Conversio
               onClick={() => setConversionType(option.value)}
               className={`p-3 rounded-xl text-sm font-medium transition-all duration-200 hover:scale-105 ${
                 conversionType === option.value
-                  ? 'bg-blue-500 text-white shadow-lg'
+                  ? 'bg-rose-500 text-white shadow-lg'
                   : 'bg-white/50 dark:bg-gray-800/50 text-gray-700 dark:text-gray-300 hover:bg-white/70 dark:hover:bg-gray-800/70'
               }`}
             >

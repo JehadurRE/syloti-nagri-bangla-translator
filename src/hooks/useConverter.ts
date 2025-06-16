@@ -43,7 +43,9 @@ export const useConverter = () => {
         body: JSON.stringify({ text: inputText })
       });
 
-      const remaining = response.headers.get('X-RateLimit-Remaining');
+      const remaining = response.headers.get('x-ratelimit-remaining');
+      console.log('API response headers:', response.headers);
+      console.log('Remaining requests:', remaining);
       if (remaining) {
         setRemainingRequests(parseInt(remaining));
       }

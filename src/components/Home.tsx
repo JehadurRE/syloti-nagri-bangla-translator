@@ -28,7 +28,7 @@ const Home = () => {
         <div className="max-w-7xl mx-auto text-center">
           <div className="animate-fade-in">
             <h1 className="text-4xl sm:text-6xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-green-600 via-green-400 to-red-600 bg-clip-text text-transparent">
                 Syloti Nagri
               </span>
               <br />
@@ -41,7 +41,7 @@ const Home = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link
                 to="/converter"
-                className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-200 group"
+                className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-green-500 to-rose-600 text-white font-semibold rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-200 group"
               >
                 Start Converting
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -78,7 +78,7 @@ const Home = () => {
                 className="glass-effect p-8 rounded-2xl hover:scale-105 transition-all duration-300 group"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className="text-blue-500 mb-4 group-hover:scale-110 transition-transform duration-200">
+                <div className="text-green-500 mb-4 group-hover:scale-110 transition-transform duration-200">
                   {feature.icon}
                 </div>
                 <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-3">
@@ -105,7 +105,7 @@ const Home = () => {
             </p>
             <Link
               to="/converter"
-              className="inline-flex items-center px-10 py-5 bg-gradient-to-r from-purple-500 to-pink-600 text-white font-semibold rounded-xl hover:shadow-xl hover:scale-105 transition-all duration-200 group"
+              className="inline-flex items-center px-10 py-5 bg-gradient-to-r from-green-500 to-rose-600 text-white font-semibold rounded-xl hover:shadow-xl hover:scale-105 transition-all duration-200 group"
             >
               Get Started Now
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />

@@ -74,7 +74,24 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4">
               <p className="text-gray-600 dark:text-gray-300 text-sm flex items-center">
-                Made with <Heart className="w-4 h-4 mx-1 text-red-500" /> by JehadurRE
+                Made with <Heart className="w-4 h-4 mx-1 text-red-500" /> by{' '}
+                <a
+                  href="https://github.com/JehadurRE"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-orange-500 hover:text-orange-700 dark:text-blue-400 dark:hover:text-blue-300 transition-colors duration-200 mx-1"
+                >
+                  JehadurRE
+                </a>
+                &amp;
+                <a
+                  href="https://github.com/yhzaison"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 transition-colors duration-200 mx-1"
+                >
+                  YH ZAISON
+                </a>
               </p>
               <p className="text-gray-500 dark:text-gray-400 text-xs">
                 Inspired from{' '}

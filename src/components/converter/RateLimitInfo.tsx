@@ -6,6 +6,8 @@ interface RateLimitInfoProps {
 }
 
 const RateLimitInfo = ({ remainingRequests }: RateLimitInfoProps) => {
+
+  console.log('Remaining requests:', remainingRequests);
   if (remainingRequests === null) return null;
 
   return (

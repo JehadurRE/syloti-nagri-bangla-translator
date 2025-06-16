@@ -36,11 +36,13 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2 group">
-            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center transform group-hover:scale-110 transition-transform duration-200">
-              <Globe className="w-5 h-5 text-white" />
-            </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Syloti Converter
+            <img
+              src="/logo/nagri logo.svg"
+              alt="Syloti Converter Logo"
+              className="w-8 h-8 rounded-lg transform group-hover:scale-110 transition-transform duration-200"
+            />
+            <span className="text-xl font-bold bg-gradient-to-r from-green-600 to-red-600 bg-clip-text text-transparent">
+              Syloti Nagri Converter
             </span>
           </Link>
 
@@ -52,7 +54,7 @@ const Navbar = () => {
                 to={item.path}
                 className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:scale-105 ${
                   isActive(item.path)
-                    ? 'bg-blue-500/20 text-blue-600 dark:text-blue-400'
+                    ? 'bg-blue-500/20 text-green-600 dark:text-green-400'
                     : 'text-gray-700 dark:text-gray-300 hover:bg-white/20 dark:hover:bg-white/10'
                 }`}
               >
@@ -64,7 +66,7 @@ const Navbar = () => {
             <DropdownMenu>
               <DropdownMenuTrigger className={`flex items-center space-x-1 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:scale-105 ${
                 isExperimentalActive()
-                  ? 'bg-blue-500/20 text-blue-600 dark:text-blue-400'
+                  ? 'bg-blue-500/20 text-rose-600 dark:text-rose-400'
                   : 'text-gray-700 dark:text-gray-300 hover:bg-white/20 dark:hover:bg-white/10'
               }`}>
                 <span>Experimental</span>

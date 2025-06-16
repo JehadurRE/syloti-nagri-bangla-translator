@@ -23,7 +23,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <ThemeProvider>
-          <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-blue-900 dark:to-purple-900 transition-all duration-500 flex flex-col">
+          <div className="min-h-screen bg-gradient-to-br from-green-200 via-pink-50 to-red-50 dark:from-gray-900 dark:via-green-900 dark:to-rose-900 transition-all duration-500 flex flex-col">
             <Navbar />
             <main className="flex-1">
               <Routes>
