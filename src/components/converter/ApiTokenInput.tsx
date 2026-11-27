@@ -30,7 +30,7 @@ const ApiTokenInput = ({ apiToken, setApiToken }: ApiTokenInputProps) => {
         />
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
           Your token will be saved locally for this session.
-          <i> need more token? just email to <a href="mailto:nagri@jehadurre.icu" className="underline text-blue-600 dark:text-blue-400">nagri@jehadurre.icu</a> </i>
+          <i> need more token? open an <a href="https://github.com/JehadurRE/syloti-nagri-bangla-translator/issues" target="_blank" rel="noopener noreferrer" className="underline text-blue-600 dark:text-blue-400">issue on GitHub</a> </i>
         </p>
       </div>
     </div>

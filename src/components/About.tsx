@@ -165,7 +165,7 @@ const About = () => {
                     GitHub Profile
                   </a>
                   <a
-                    href="https://jehadurre.icu/"
+                    href="https://syloti.jehadurre.me"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200"
@@ -203,7 +203,7 @@ const About = () => {
                     GitHub Profile
                   </a>
                   <a
-                    href="https://nagri.jehadurre.icu/api/docs"
+                    href="https://syloti-converter-api-express.vercel.app/api/docs"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200"
@@ -261,7 +261,7 @@ const About = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="https://github.com/JehadurRE/syloti-converter"
+                href="https://github.com/JehadurRE/syloti-nagri-bangla-translator"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-gray-700 to-gray-900 text-white font-medium rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-200"
@@ -270,7 +270,7 @@ const About = () => {
                 Star on GitHub
               </a>
               <a
-                href="https://nagri.jehadurre.icu/api/docs"
+                href="https://syloti-converter-api-express.vercel.app/api/docs"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-500 to-rose-600 text-white font-medium rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-200"

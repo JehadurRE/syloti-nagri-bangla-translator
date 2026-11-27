@@ -1,8 +1,8 @@
 
 # 🔤 Syloti Nagri Converter - Free Online Script Translator
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Now-blue?style=for-the-badge)](https://syloti-converter.vercel.app/)
-[![GitHub Stars](https://img.shields.io/github/stars/JehadurRE/syloti-converter?style=for-the-badge)](https://github.com/JehadurRE/syloti-converter)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Now-blue?style=for-the-badge)](https://syloti.jehadurre.me)
+[![GitHub Stars](https://img.shields.io/github/stars/JehadurRE/syloti-nagri-bangla-translator?style=for-the-badge)](https://github.com/JehadurRE/syloti-nagri-bangla-translator)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 [![Made with Love](https://img.shields.io/badge/Made%20with-❤️-red?style=for-the-badge)](https://github.com/JehadurRE)
 
@@ -42,7 +42,7 @@ A comprehensive, free online platform for converting between **Bangla**, **Sylot
 
 ## 🚀 Live Demo
 
-Experience the converter: **[syloti-converter.vercel.app](https://syloti-converter.vercel.app/)**
+Experience the converter: **[syloti.jehadurre.me](https://syloti.jehadurre.me)**
 
 ## 🔧 Technology Stack
 
@@ -70,10 +70,10 @@ Built with modern web technologies for optimal performance:
 
 ```bash
 # Clone the repository
-git clone https://github.com/JehadurRE/syloti-converter.git
+git clone https://github.com/JehadurRE/syloti-nagri-bangla-translator.git
 
 # Navigate to project directory
-cd syloti-converter
+cd syloti-nagri-bangla-translator
 
 # Install dependencies
 npm install
@@ -235,10 +235,9 @@ Created by Md. Jehad (JehadurRE) with ❤️
 
 Need help or have questions?
 
-- 📖 **Documentation**: [Project Wiki](https://github.com/JehadurRE/syloti-converter/wiki)
-- 🐛 **Issues**: [GitHub Issues](https://github.com/JehadurRE/syloti-converter/issues)
-- 💬 **Discussions**: [GitHub Discussions](https://github.com/JehadurRE/syloti-converter/discussions)
-- 📧 **Email**: support@syloti-converter.com
+- 📖 **Documentation**: [Project Wiki](https://github.com/JehadurRE/syloti-nagri-bangla-translator/wiki)
+- 🐛 **Issues**: [GitHub Issues](https://github.com/JehadurRE/syloti-nagri-bangla-translator/issues)
+- 💬 **Discussions**: [GitHub Discussions](https://github.com/JehadurRE/syloti-nagri-bangla-translator/discussions)
 
 ## 🌟 Show Your Support
 
@@ -257,6 +256,6 @@ If this project helps you learn Syloti Nagri or supports your research:
 
 *Preserving Sylheti Heritage Through Technology*
 
-[🌐 Visit Website](https://syloti-converter.vercel.app/) • [📚 API Docs](https://syloti-converter-api-express.vercel.app/api/docs) • [🐙 GitHub](https://github.com/JehadurRE/syloti-converter)
+[🌐 Visit Website](https://syloti.jehadurre.me) • [📚 API Docs](https://syloti-converter-api-express.vercel.app/api/docs) • [🐙 GitHub](https://github.com/JehadurRE/syloti-nagri-bangla-translator)
 
 </div>
